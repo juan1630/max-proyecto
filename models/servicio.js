@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-
-
 let schema = mongoose.Schema;
 
 
@@ -15,11 +13,10 @@ let schemaServicio = new schema({
     modeloEquipo: { type: String },
     falla: { type: String },
     accesorio: { type: String },
-    adelanto: { type: String },
-    costoTotal: { type: String },
+    adelanto: { type: Number },
+    costoTotal: { type: Number },
     productos: { type:String },
-    estado: { type: String },
-    usuario:{ type: mongoose.Types.ObjectId('Usuario') }
+    estado: { type: String }
 
 });
 

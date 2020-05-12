@@ -7,6 +7,7 @@ const { URI } = require('./config/');
 const login = require('./routes/login');
 const usuario = require('./routes/user');
 const producto = require('./routes/productos');
+const servicio = require('./routes/servicio');
 
 
 const app = express();
@@ -34,6 +35,7 @@ app.use(function(req, res, next) {
 
 app.use('/user', usuario);
 app.use('/producto', producto);
+app.use('/servicio', servicio );
 app.use('/login', login);
 
 mongoose.connection.openUri(`mongodb://localhost:27017/ferrteria`, {
