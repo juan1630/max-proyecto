@@ -16,7 +16,7 @@ let schemaServicio = new schema({
     adelanto: { type: Number },
     costoTotal: { type: Number },
     productos: { type:String },
-    estado: { type: String }
+    estado: { type: String , default: 'pendiente'}
 
 });
 
