@@ -1,10 +1,17 @@
 var express = require('express');
 var Productos = require('../models/productos');
-
+const fileUpload = require('express-fileupload');
 
 var app = express();
 
+
+
+app.use(fileUpload());
+
+
+
 app.get('/', (req, res) => {
+
     Productos.find({}, (error, items) => {
         if (error) {
             return res.status(300).json({
@@ -128,8 +135,12 @@ app.put('/:id', (req, res) => {
 
 });
 
+// creacion de un nuevo producto 
+
 app.post('/', (req, res) => {
-    var body = req.body;
+
+
+    let body = req.body;
 
     var producto = new Productos({
         nombre: body.nombre,
@@ -159,6 +170,48 @@ app.post('/', (req, res) => {
             });
         }
     });
+
+});
+
+
+app.delete('/producto/:id', (req, resp) => {
+
+    let id = req.params.id;
+
+
+    Productos.findByIdAndRemove({ _id: id }, (erros, productoDeleted) => {
+
+
+        if (erros) {
+            return res.status(500).json({
+                ok: false,
+                mensaje: 'Algo pasó',
+                error: erros
+            });
+        }
+
+        if (!productoDeleted) {
+
+            return res.status(400).json({
+                ok: false,
+                message: 'No se encontró el usuario',
+                producto: productoDeleted
+            });
+        }
+
+
+        return resp.status(200)
+            .json({
+                ok: true,
+                message: 'Se eliminó el producto',
+                producto: productoDeleted
+            });
+
+    });
+
+
+
+
 
 });
 
